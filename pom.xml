@@ -1,0 +1,43 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>grupo_9o14</groupId>
+	<artifactId>Notas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+    <repository>
+      <id>maven.uqbar.org-releases</id>
+      <name>maven.uqbar.org-releases</name>
+      <url>http://maven.uqbar.org/releases</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>maven.uqbar.org-snapshots</id>
+      <name>maven.uqbar.org-snapshots</name>
+      <url>http://maven.uqbar.org/snapshots</url>
+    </repository>
+  </repositories>
+	<dependencies>
+		<dependency>
+	        <groupId>junit</groupId>
+	        <artifactId>junit</artifactId>
+	        <version>4.12</version>
+      	</dependency>
+		<dependency>
+			<groupId>org.uqbar-project</groupId>
+			<artifactId>arena-jface</artifactId>
+			<version>3.6.3</version>
+		</dependency>
+	</dependencies>
+</project>
