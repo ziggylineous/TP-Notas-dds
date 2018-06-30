@@ -7,20 +7,35 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.MainWindow;
 
-public class AlumnoWindow extends MainWindow<Alumno> {
-    public AlumnoWindow() {
-        super(new Alumno("ignacio", "ferrari", "140-970-0"));
+public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
+    public AlumnoWindow(Alumno alumno) {
+        super(new AlumnoViewModel(alumno));
     }
 
     @Override
     public void createContents(Panel mainPanel) {
         setTitle("Vista Alumno");
-        mainPanel.setLayout(new VerticalLayout());
+        
+        armarPanelDatos(mainPanel);
+        armarPanelTareas(mainPanel);
+    }
+    
+    private void armarPanelDatos(Panel mainPanel) {
+    	Panel panelDatos = new Panel(mainPanel);
+        panelDatos.setLayout(new VerticalLayout());
+        
+        new Label(panelDatos).setText("Nombre: ");
+        new TextBox(panelDatos).bindValueToProperty("alumno.nombre");
 
-        new Label(mainPanel).setText("Nombre: ");
-        new TextBox(mainPanel).bindValueToProperty("nombre");
-
-        new Label(mainPanel).setText("Apellido: ");
-        new TextBox(mainPanel).bindValueToProperty("apellido");
+        new Label(panelDatos).setText("Apellido: ");
+        new TextBox(panelDatos).bindValueToProperty("alumno.apellido");
+    }
+    
+    private void armarPanelTareas(Panel mainPanel) {
+    	Panel panelTareas = new Panel(mainPanel);
+    	panelTareas.setLayout(new VerticalLayout());
+        
+        new Label(panelTareas).setText("Asignaciones: ");
+        
     }
 }
