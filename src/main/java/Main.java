@@ -4,7 +4,7 @@ import vista.AlumnoWindow;
 
 public class Main {
     public static void main(String[] args) {
-    	Alumno alumno = new Alumno("ignacio", "ferrari", "140-970-0");
+    	Alumno alumno = new Alumno("ignacio", "ferrari", "140-970-0", "Ziggylineous");
     	alumno.agregarAsignacionDeTarea(new AsignacionTarea("TP anual"));
     	alumno.agregarAsignacionDeTarea(new AsignacionTarea("Primer Parcial"));
         

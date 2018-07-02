@@ -10,13 +10,15 @@ public class Alumno {
     private String nombre;
     private String apellido;
     private String legajo;
+    private String usuarioGithub;
     
     private List<AsignacionTarea> asignacionesDeTareas;
 
-    public Alumno(String nombre, String apellido, String legajo) {
+    public Alumno(String nombre, String apellido, String legajo, String usuarioGithub) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.legajo = legajo;
+        this.usuarioGithub = usuarioGithub;
         
         asignacionesDeTareas = new ArrayList<>();
     }
@@ -33,10 +35,16 @@ public class Alumno {
     
     public String getLegajo() { return legajo; }
     public void setLegajo(String nuevoLegajo) { apellido = nuevoLegajo; }
-    
-    public List<AsignacionTarea> getAsignacionesDeTareas() { return asignacionesDeTareas; }
 
+    public String getUsuarioGithub() { return usuarioGithub; }
+    public void setUsuarioGithub(String usuarioGithub) { this.usuarioGithub = usuarioGithub; }
+
+    public List<AsignacionTarea> getAsignacionesDeTareas() { return asignacionesDeTareas; }
     public void setAsignacionesDeTareas(List<AsignacionTarea> nuevasAsignacionesDeTareas) {
         this.asignacionesDeTareas = nuevasAsignacionesDeTareas;
+    }
+
+    public boolean tieneAlgunaAsignacion() {
+        return !asignacionesDeTareas.isEmpty();
     }
 }
