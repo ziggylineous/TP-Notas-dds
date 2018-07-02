@@ -8,22 +8,24 @@ import org.uqbar.commons.model.annotations.Observable;
 @Observable
 public class AsignacionTarea {
 	private String tarea;
-	private List<Integer> notas;
+	private List<Nota> notas;
 	
 	public AsignacionTarea(String tarea) {
 		this.tarea = tarea;
+
 		notas = new ArrayList<>();
 	}
 	
-	public boolean estaAprobada() {
-		return notas.stream().anyMatch(nota -> nota.compareTo(new Integer(6)) >= 0);
+	public boolean getAprobada() {
+		return notas.stream().anyMatch(nota -> nota.getAprobada());
 	}
 	
-	public void ponerNota(Integer nota) {
+	public void ponerNota(Nota nota) {
 		notas.add(nota);
 	}
 	
 	public String getTarea() { return tarea; }
 	
-	public List<Integer> getNotas() { return notas; }
+	public List<Nota> getNotas() { return notas; }
+	public void setNotas(List<Nota> notas) { this.notas = notas; }
 }
