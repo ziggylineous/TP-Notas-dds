@@ -1,6 +1,4 @@
-import modelo.Alumno;
-import modelo.AsignacionTarea;
-import modelo.NotaNumerica;
+import modelo.*;
 import vista.AlumnoWindow;
 
 public class Main {
@@ -13,9 +11,16 @@ public class Main {
 
 		AsignacionTarea primerParcial = new AsignacionTarea("Primer Parcial");
         primerParcial.ponerNota(new NotaNumerica(6));
-    	alumno.agregarAsignacionDeTarea(tpAnual);
 
+		AsignacionTarea tpConceptual = new AsignacionTarea("TP Conceptual");
+		tpConceptual.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
+		tpConceptual.ponerNota(new NotaConceptual(EnumNotasConceptuales.REGULAR_MAS));
+
+
+		alumno.agregarAsignacionDeTarea(tpAnual);
     	alumno.agregarAsignacionDeTarea(primerParcial);
+		alumno.agregarAsignacionDeTarea(tpConceptual);
+
         
     	new AlumnoWindow(alumno).startApplication();
     }
