@@ -11,6 +11,10 @@ import org.uqbar.arena.bindings.ValueTransformer;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.*;
+import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.List;
+import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.MainWindow;
@@ -19,10 +23,15 @@ import org.uqbar.lacar.ui.model.PanelBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
 import org.uqbar.lacar.ui.model.bindings.Observable;
 
+import java.awt.*;
+
+
+//import java.util.List;
+
 
 public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
-    public AlumnoWindow(Alumno alumno) {
-        super(new AlumnoViewModel(alumno));
+    public AlumnoWindow(Alumno[] listaAlumnos) {
+        super(new AlumnoViewModel(listaAlumnos));
     }
 
     @Override
@@ -39,12 +48,22 @@ public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
     private void armarPanelDatos(Panel mainPanel) {
     	Panel panelDatos = new Panel(mainPanel);
         panelDatos.setWidth(200);
+        panelDatos.setLayout(new VerticalLayout());
+
+        new Label(panelDatos).setText("Alumno ingresado: ").setBackground(Color.orange);
+        new Label(panelDatos).setBackground(Color.orange).bindValueToProperty("alumno.nombre");
 
         new Label(panelDatos).setText("Nombre: ");
-        new TextBox(panelDatos).bindValueToProperty("alumno.nombre");
+        new TextBox(panelDatos).bindValueToProperty("nombre");
 
         new Label(panelDatos).setText("Apellido: ");
-        new TextBox(panelDatos).bindValueToProperty("alumno.apellido");
+        new TextBox(panelDatos).bindValueToProperty("apellido");
+
+        new Button(panelDatos).setCaption("Ingresar")
+                .onClick(()-> this.getModelObject().obtenerAlumnoPorDatos());
+
+        new Label(panelDatos).setForeground(Color.red).bindValueToProperty("advertencia");
+
     }
 
     private void armarPanelAsignaciones(Panel mainPanel) {
