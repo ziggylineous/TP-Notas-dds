@@ -31,13 +31,10 @@ public class Main {
 
 		alumno2.agregarAsignacionDeTarea(tpConceptual2);
 
-		List<Alumno> listAlumno = new ArrayList<>();
-		listAlumno.add(alumno);
-		listAlumno.add(alumno2);
+		List<Alumno> alumnos = new ArrayList<>();
+		alumnos.add(alumno);
+		alumnos.add(alumno2);
 
-		Alumno[] arrayAlumnos = new Alumno[listAlumno.size()];
-		arrayAlumnos = listAlumno.toArray(arrayAlumnos);
-
-    	new AlumnoWindow(arrayAlumnos).startApplication();
+    	new AlumnoWindow(alumnos).startApplication();
     }
 }

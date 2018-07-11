@@ -30,19 +30,35 @@ import java.awt.*;
 
 
 public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
-    public AlumnoWindow(Alumno[] listaAlumnos) {
-        super(new AlumnoViewModel(listaAlumnos));
+    public AlumnoWindow(java.util.List<Alumno> alumnos) {
+        super(new AlumnoViewModel(alumnos));
     }
 
     @Override
     public void createContents(Panel mainPanel) {
         setTitle("Vista Alumno");
+        armarPanelSeleccionAlumno(mainPanel);
+        armarPanelAlumno(mainPanel);
+    }
 
-        mainPanel.setLayout(new ColumnLayout(3));
+    private void armarPanelSeleccionAlumno(Panel mainPanel) {
+        Panel panelSeleccionAlumnos = new Panel(mainPanel);
 
-        armarPanelDatos(mainPanel);
-        armarPanelAsignaciones(mainPanel);
-        armarPanelAsignacionActual(mainPanel);
+        Selector<Alumno> selectorAlumno = new Selector<Alumno>(mainPanel)
+                .allowNull(false);
+        selectorAlumno.bindValueToProperty("alumno");
+        Binding<Alumno, Selector<Alumno>, ListBuilder<Alumno>> bindingItems =
+                selectorAlumno.bindItems(new ObservableProperty("alumnos"));
+        bindingItems.setAdapter(new PropertyAdapter(Alumno.class, "apellidoYNombre"));
+    }
+
+    private void armarPanelAlumno(Panel mainPanel) {
+        Panel panelAlumno = new Panel(mainPanel);
+        panelAlumno.setLayout(new ColumnLayout(3));
+
+        armarPanelDatos(panelAlumno);
+        armarPanelAsignaciones(panelAlumno);
+        armarPanelAsignacionActual(panelAlumno);
     }
     
     private void armarPanelDatos(Panel mainPanel) {
@@ -50,20 +66,17 @@ public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
         panelDatos.setWidth(200);
         panelDatos.setLayout(new VerticalLayout());
 
-        new Label(panelDatos).setText("Alumno ingresado: ").setBackground(Color.orange);
-        new Label(panelDatos).setBackground(Color.orange).bindValueToProperty("alumno.nombre");
-
         new Label(panelDatos).setText("Nombre: ");
-        new TextBox(panelDatos).bindValueToProperty("nombre");
+        new TextBox(panelDatos).bindValueToProperty("alumno.nombre");
 
         new Label(panelDatos).setText("Apellido: ");
-        new TextBox(panelDatos).bindValueToProperty("apellido");
+        new TextBox(panelDatos).bindValueToProperty("alumno.apellido");
 
-        new Button(panelDatos).setCaption("Ingresar")
-                .onClick(()-> this.getModelObject().obtenerAlumnoPorDatos());
+        new Label(panelDatos).setText("Legajo: ");
+        new TextBox(panelDatos).bindValueToProperty("alumno.legajo");
 
-        new Label(panelDatos).setForeground(Color.red).bindValueToProperty("advertencia");
-
+        new Label(panelDatos).setText("Usuario Github: ");
+        new TextBox(panelDatos).bindValueToProperty("alumno.usuarioGithub");
     }
 
     private void armarPanelAsignaciones(Panel mainPanel) {

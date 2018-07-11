@@ -44,6 +44,8 @@ public class Alumno {
         this.asignacionesDeTareas = nuevasAsignacionesDeTareas;
     }
 
+    public String getApellidoYNombre() { return String.format("%s, %s", apellido, nombre); }
+
     public boolean tieneAlgunaAsignacion() {
         return !asignacionesDeTareas.isEmpty();
     }
