@@ -31,9 +31,31 @@ public class Main {
 
 		alumno2.agregarAsignacionDeTarea(tpConceptual2);
 
+        Alumno alumno3 = new Alumno("jaimito", "delCampo", "88-472-1", "jaimeKPO");
+		AsignacionTarea parcialFisica2 = new AsignacionTarea("Parcial fisica 2");
+		parcialFisica2.ponerNota(new NotaNumerica(1));
+        parcialFisica2.ponerNota(new NotaNumerica(1));
+        parcialFisica2.ponerNota(new NotaNumerica(2));
+
+        AsignacionTarea tpFisica2 = new AsignacionTarea("TP fisica 2");
+        tpFisica2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
+        tpFisica2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
+        tpFisica2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
+
+        AsignacionTarea parcialIngles = new AsignacionTarea("Parcial ingles");
+        parcialIngles.ponerNota(new NotaNumerica(4));
+        parcialIngles.ponerNota(new NotaNumerica(2));
+        parcialIngles.ponerNota(new NotaNumerica(5));
+        parcialIngles.ponerNota(new NotaNumerica(6));
+
+        alumno3.agregarAsignacionDeTarea(parcialFisica2);
+        alumno3.agregarAsignacionDeTarea(tpFisica2);
+        alumno3.agregarAsignacionDeTarea(parcialIngles);
+
 		List<Alumno> alumnos = new ArrayList<>();
 		alumnos.add(alumno);
 		alumnos.add(alumno2);
+		alumnos.add(alumno3);
 
     	new AlumnoWindow(alumnos).startApplication();
     }
