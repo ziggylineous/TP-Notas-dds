@@ -3,13 +3,20 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
 import org.uqbar.commons.model.annotations.Observable;
 
 @Observable
 public class Alumno {
+    @SerializedName("first_name")
     private String nombre;
+
+    @SerializedName("last_name")
     private String apellido;
+
     private String legajo;
+
+    @SerializedName("github_user")
     private String usuarioGithub;
     
     private List<AsignacionTarea> asignacionesDeTareas;
@@ -48,5 +55,11 @@ public class Alumno {
 
     public boolean tieneAlgunaAsignacion() {
         return !asignacionesDeTareas.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("nombre: %s\napellido: %s\nlegajo: %s\ngithub: %s",
+                nombre, apellido, legajo, usuarioGithub);
     }
 }

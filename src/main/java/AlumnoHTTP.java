@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -13,19 +14,15 @@ public class AlumnoHTTP {
     Alumno traer() {
         Client client = Client.create();
 
-        //WebResource webResource =
         ClientResponse response = client
                 .resource(API)
                 .path(RECURSO_ALUMNO)
                 .header("Authorization", "Bearer " + TOKEN)
+                .accept(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
 
-
-        //ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON)
-                //.get(ClientResponse.class);
-
         if (response.getStatus() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : "
+            throw new RuntimeException("Error GET de alumno, error response : "
                     + response.getStatus());
         }
 
@@ -34,6 +31,12 @@ public class AlumnoHTTP {
         System.out.println("Output from Server .... \n");
         System.out.println(output);
 
-        return new Alumno("_", "_", "_", "_");
+        Gson gson = new Gson();
+        Alumno alumno = gson.fromJson(output, Alumno.class);
+
+        if (alumno.getLegajo() == null)
+            alumno.setLegajo("123");
+
+        return alumno;
     }
 }

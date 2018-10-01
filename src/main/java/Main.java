@@ -14,7 +14,9 @@ public class Main {
 
     public static void entrega2() {
 		try {
-			new AlumnoHTTP().traer();
+			Alumno alumnoDesdeRecurso = new AlumnoHTTP().traer();
+			System.out.println(alumnoDesdeRecurso.toString());
+
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
