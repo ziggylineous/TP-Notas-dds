@@ -14,6 +14,7 @@ public class Alumno {
     @SerializedName("last_name")
     private String apellido;
 
+    @SerializedName("code")
     private String legajo;
 
     @SerializedName("github_user")

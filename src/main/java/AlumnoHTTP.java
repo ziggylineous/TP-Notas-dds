@@ -11,7 +11,7 @@ public class AlumnoHTTP {
     private static String RECURSO_ALUMNO = "student";
     private static String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMTEyMjIzMzMiLCJybmQiOiJ5SXNmZFIwN2lIR3BRRmVjYU9KT2VRPT0ifQ.9pVJGUXhrJPQ-TptNCt971l0h_1dWqWgMrHAWXJchho";
 
-    Alumno traer() {
+    public Alumno traer() {
         Client client = Client.create();
 
         ClientResponse response = client
@@ -34,9 +34,10 @@ public class AlumnoHTTP {
         Gson gson = new Gson();
         Alumno alumno = gson.fromJson(output, Alumno.class);
 
-        if (alumno.getLegajo() == null)
-            alumno.setLegajo("123");
-
         return alumno;
+    }
+
+    public void put(Alumno alumno) {
+        // TODO
     }
 }
