@@ -21,10 +21,10 @@ public class DeserializadorNota implements JsonDeserializer<Nota> {
             return new NotaNumerica(valuePrimitive.getAsInt());
         }
         else if (valuePrimitive.isString()) {
-            return new NotaConceptual(EnumNotasConceptuales.valueOf(valuePrimitive.getAsString()));
+            return new NotaConceptual(EnumNotasConceptuales.desdeNombre(valuePrimitive.getAsString()));
         }
         else {
-            throw new JsonParseException("DeserializadorNota: valor raro");
+            throw new JsonParseException("DeserializadorNota: valor de nota raro, ni int ni string");
         }
     }
 }

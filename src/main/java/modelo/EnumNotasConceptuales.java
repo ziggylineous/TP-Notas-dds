@@ -1,6 +1,9 @@
 package modelo;
 
+import java.util.Arrays;
+
 public enum EnumNotasConceptuales {
+    BIEN_MAS("B+", true),
     BIEN("B", true),
     BIEN_MENOS("B-", true),
     REGULAR_MAS("R+", true),
@@ -22,5 +25,14 @@ public enum EnumNotasConceptuales {
 
     public boolean aprueba(){
         return notaAprueba;
+    }
+
+    static public EnumNotasConceptuales desdeNombre(String nombre) {
+        EnumNotasConceptuales nota = Arrays.stream(values())
+                .filter(nombreNota -> nombreNota.equals(nombre))
+                .findAny()
+                .orElseThrow(() -> new EnumConstantNotPresentException(EnumNotasConceptuales.class, nombre));
+
+        return nota;
     }
 }
