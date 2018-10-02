@@ -3,8 +3,11 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import modelo.Alumno;
+import modelo.AsignacionTarea;
 
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlumnoHTTP {
     private static String API = "http://notitas.herokuapp.com/";
@@ -12,6 +15,15 @@ public class AlumnoHTTP {
     private static String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMTEyMjIzMzMiLCJybmQiOiJ5SXNmZFIwN2lIR3BRRmVjYU9KT2VRPT0ifQ.9pVJGUXhrJPQ-TptNCt971l0h_1dWqWgMrHAWXJchho";
 
     public Alumno traer() {
+        Alumno alumno = traerAlumno();
+        List<AsignacionTarea> asignaciones = traerAsignaciones();
+
+        // TODO: meterle las asignaciones al alumno
+
+        return alumno;
+    }
+
+    private Alumno traerAlumno() {
         Client client = Client.create();
 
         ClientResponse response = client
@@ -36,6 +48,13 @@ public class AlumnoHTTP {
 
         return alumno;
     }
+
+    // TODO
+    private List<AsignacionTarea> traerAsignaciones() {
+
+        return new ArrayList<>();
+    }
+
 
     public void put(Alumno alumno) {
         // TODO

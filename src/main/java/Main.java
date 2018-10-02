@@ -25,14 +25,14 @@ public class Main {
     public static void entrega1() {
 		Alumno alumno = new Alumno("ignacio", "ferrari", "140-970-0", "Ziggylineous");
 
-		AsignacionTarea tpAnual = new AsignacionTarea("TP anual");
+		AsignacionTarea tpAnual = new AsignacionTarea("TP anual", "6 entregas bla");
 		tpAnual.ponerNota(new NotaNumerica(4));
 		tpAnual.ponerNota(new NotaNumerica(2));
 
-		AsignacionTarea primerParcial = new AsignacionTarea("Primer Parcial");
+		AsignacionTarea primerParcial = new AsignacionTarea("Primer Parcial", "diseño con objetos");
 		primerParcial.ponerNota(new NotaNumerica(6));
 
-		AsignacionTarea tpConceptual = new AsignacionTarea("TP Conceptual");
+		AsignacionTarea tpConceptual = new AsignacionTarea("TP Conceptual", "si habla en clase");
 		tpConceptual.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
 		tpConceptual.ponerNota(new NotaConceptual(EnumNotasConceptuales.REGULAR_MAS));
 
@@ -43,23 +43,23 @@ public class Main {
 
 
 		Alumno alumno2 = new Alumno("pedro", "perez", "110-472-1", "pedro.perez");
-		AsignacionTarea tpConceptual2 = new AsignacionTarea("TP Conceptual 2");
+		AsignacionTarea tpConceptual2 = new AsignacionTarea("TP Conceptual 2", "fruta");
 		tpConceptual2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
 
 		alumno2.agregarAsignacionDeTarea(tpConceptual2);
 
 		Alumno alumno3 = new Alumno("jaimito", "delCampo", "88-472-1", "jaimeKPO");
-		AsignacionTarea parcialFisica2 = new AsignacionTarea("Parcial fisica 2");
+		AsignacionTarea parcialFisica2 = new AsignacionTarea("Parcial fisica 2", "_, _, _");
 		parcialFisica2.ponerNota(new NotaNumerica(1));
 		parcialFisica2.ponerNota(new NotaNumerica(1));
 		parcialFisica2.ponerNota(new NotaNumerica(2));
 
-		AsignacionTarea tpFisica2 = new AsignacionTarea("TP fisica 2");
+		AsignacionTarea tpFisica2 = new AsignacionTarea("TP fisica 2", "");
 		tpFisica2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
 		tpFisica2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
 		tpFisica2.ponerNota(new NotaConceptual(EnumNotasConceptuales.MAL));
 
-		AsignacionTarea parcialIngles = new AsignacionTarea("Parcial ingles");
+		AsignacionTarea parcialIngles = new AsignacionTarea("Parcial ingles", "");
 		parcialIngles.ponerNota(new NotaNumerica(4));
 		parcialIngles.ponerNota(new NotaNumerica(2));
 		parcialIngles.ponerNota(new NotaNumerica(5));
