@@ -15,7 +15,11 @@ public class Main {
     public static void entrega2() {
 		try {
 			Alumno alumnoDesdeRecurso = new AlumnoHTTP().traer();
-			System.out.println(alumnoDesdeRecurso.toString());
+
+			List<Alumno> alumnos = new ArrayList<>();
+			alumnos.add(alumnoDesdeRecurso);
+
+			new AlumnoWindow(alumnos).startApplication();
 
 		} catch (RuntimeException e) {
 			e.printStackTrace();

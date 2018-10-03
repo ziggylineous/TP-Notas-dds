@@ -1,34 +1,29 @@
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import json.DeserializadorNota;
 import modelo.Alumno;
 import modelo.AsignacionTarea;
+import modelo.Nota;
 
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AlumnoHTTP {
     private static String API = "http://notitas.herokuapp.com/";
     private static String RECURSO_ALUMNO = "student";
+    private static String RECURSO_ASIGNACIONES = "student/assignments";
     private static String TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMTEyMjIzMzMiLCJybmQiOiJ5SXNmZFIwN2lIR3BRRmVjYU9KT2VRPT0ifQ.9pVJGUXhrJPQ-TptNCt971l0h_1dWqWgMrHAWXJchho";
 
-    public Alumno traer() {
-        Alumno alumno = traerAlumno();
-        List<AsignacionTarea> asignaciones = traerAsignaciones();
-
-        // TODO: meterle las asignaciones al alumno
-
-        return alumno;
-    }
-
-    private Alumno traerAlumno() {
+    private String traerRecursoJson(String recurso) {
         Client client = Client.create();
 
         ClientResponse response = client
                 .resource(API)
-                .path(RECURSO_ALUMNO)
+                .path(recurso)
                 .header("Authorization", "Bearer " + TOKEN)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
@@ -43,18 +38,43 @@ public class AlumnoHTTP {
         System.out.println("Output from Server .... \n");
         System.out.println(output);
 
-        Gson gson = new Gson();
-        Alumno alumno = gson.fromJson(output, Alumno.class);
+        return output;
+    }
+
+    public Alumno traer() {
+        Alumno alumno = traerAlumno();
+        List<AsignacionTarea> asignaciones = traerAsignaciones();
+
+        alumno.setAsignacionesDeTareas(asignaciones);
 
         return alumno;
     }
 
-    // TODO
-    private List<AsignacionTarea> traerAsignaciones() {
+    private Alumno traerAlumno() {
+        String alumnoJson = traerRecursoJson(RECURSO_ALUMNO);
 
-        return new ArrayList<>();
+        Gson gson = new Gson();
+        Alumno alumno = gson.fromJson(alumnoJson, Alumno.class);
+
+        return alumno;
     }
 
+    private List<AsignacionTarea> traerAsignaciones() {
+        String asignacionesJson = traerRecursoJson(RECURSO_ASIGNACIONES);
+
+        // tengo que acceder al array de assignments en lo que me mandan
+        JsonParser jsonParser = new JsonParser();
+        JsonObject json = jsonParser.parse(asignacionesJson).getAsJsonObject();
+        JsonArray assignmentsNode = json.get("assignments").getAsJsonArray();
+
+        Gson parser = new GsonBuilder()
+                .registerTypeAdapter(Nota.class, new DeserializadorNota())
+                .create();
+
+        AsignacionTarea[] asignaciones = parser.fromJson(assignmentsNode, AsignacionTarea[].class);
+
+        return Arrays.asList(asignaciones);
+    }
 
     public void put(Alumno alumno) {
         // TODO
