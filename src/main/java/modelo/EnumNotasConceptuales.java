@@ -29,7 +29,7 @@ public enum EnumNotasConceptuales {
 
     static public EnumNotasConceptuales desdeNombre(String nombre) {
         EnumNotasConceptuales nota = Arrays.stream(values())
-                .filter(nombreNota -> nombreNota.equals(nombre))
+                .filter(enumNota -> enumNota.notaConceptual.equals(nombre))
                 .findAny()
                 .orElseThrow(() -> new EnumConstantNotPresentException(EnumNotasConceptuales.class, nombre));
 

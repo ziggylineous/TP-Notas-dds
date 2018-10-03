@@ -1,5 +1,11 @@
 package json;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import modelo.Nota;
+import modelo.NotaConceptual;
+import modelo.NotaNumerica;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ParsearJsonTest {
@@ -53,7 +59,14 @@ public class ParsearJsonTest {
             "\t\"updated_at\": \"2017-03-25T13:56:07.649Z\"\n" +
         "}";
 
-        System.out.println(notaNumericaJson);
-        System.out.println(notaConceptualJson);
+        GsonBuilder parserBuilder = new GsonBuilder();
+        parserBuilder.registerTypeAdapter(Nota.class, new DeserializadorNota());
+        Gson parser = parserBuilder.create();
+
+        Nota conceptual = parser.fromJson(notaConceptualJson, Nota.class);
+        Nota numerica = parser.fromJson(notaNumericaJson, Nota.class);
+
+        Assert.assertSame(NotaNumerica.class, numerica.getClass());
+        Assert.assertSame(NotaConceptual.class, conceptual.getClass());
     }
 }
