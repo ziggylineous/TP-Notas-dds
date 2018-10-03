@@ -80,37 +80,48 @@ public class ParsearJsonTest {
     }
 
     public void leerAsignaciones() {
-        String asignaciones =
+        String asignacionesJson =
         "\"assignments\": [{\n" +
-                "        \"id\": 1,\n" +
-                "        \"title\": \"Primer Parcial\",\n" +
-                "        \"description\": null,\n" +
-                "        \"grades\": [{\n" +
-                "            \"id\": 1,\n" +
-                "            \"value\": 2,\n" +
-                "            \"created_at\": \"2017-03-25T13:56:07.526Z\",\n" +
-                "            \"updated_at\": \"2017-03-25T13:56:07.526Z\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"id\": 2,\n" +
-                "            \"value\": 7,\n" +
-                "            \"created_at\": \"2017-03-25T13:56:07.595Z\",\n" +
-                "            \"updated_at\": \"2017-03-25T13:56:07.595Z\"\n" +
-                "        }]\n" +
-                "    },\n" +
-                "\n" +
-                "    {\n" +
-                "        \"id\": 3,\n" +
-                "        \"title\": \"TPA1\",\n" +
-                "        \"description\": \"Primera Entrega del TP Anual\",\n" +
-                "        \"grades\": [{\n" +
-                "            \"id\": 4,\n" +
-                "            \"value\": \"B+\",\n" +
-                "            \"created_at\": \"2017-03-25T13:56:07.649Z\",\n" +
-                "            \"updated_at\": \"2017-03-25T13:56:07.649Z\"\n" +
-                "        }]\n" +
-                "    }]\n" +
-                "}";
-        
+        "        \"id\": 1,\n" +
+        "        \"title\": \"Primer Parcial\",\n" +
+        "        \"description\": null,\n" +
+        "        \"grades\": [{\n" +
+        "            \"id\": 1,\n" +
+        "            \"value\": 2,\n" +
+        "            \"created_at\": \"2017-03-25T13:56:07.526Z\",\n" +
+        "            \"updated_at\": \"2017-03-25T13:56:07.526Z\"\n" +
+        "        },\n" +
+        "        {\n" +
+        "            \"id\": 2,\n" +
+        "            \"value\": 7,\n" +
+        "            \"created_at\": \"2017-03-25T13:56:07.595Z\",\n" +
+        "            \"updated_at\": \"2017-03-25T13:56:07.595Z\"\n" +
+        "        }]\n" +
+        "    },\n" +
+        "\n" +
+        "    {\n" +
+        "        \"id\": 3,\n" +
+        "        \"title\": \"TPA1\",\n" +
+        "        \"description\": \"Primera Entrega del TP Anual\",\n" +
+        "        \"grades\": [{\n" +
+        "            \"id\": 4,\n" +
+        "            \"value\": \"B+\",\n" +
+        "            \"created_at\": \"2017-03-25T13:56:07.649Z\",\n" +
+        "            \"updated_at\": \"2017-03-25T13:56:07.649Z\"\n" +
+        "        }]\n" +
+        "    }]\n" +
+        "}";
+
+        AsignacionTarea[] asignaciones = parser.fromJson(asignacionesJson, AsignacionTarea[].class);
+
+        Assert.assertSame(2, asignaciones.length);
+
+        Assert.assertEquals("Primer Parcial", asignaciones[0].getTarea());
+        Assert.assertNull(asignaciones[0].getDescripcion());
+        Assert.assertSame(2, asignaciones[0].getNotas().size());
+
+        Assert.assertEquals("TPA1", asignaciones[1].getTarea());
+        Assert.assertEquals("Primera Entrega del TP Anual",asignaciones[1].getDescripcion());
+        Assert.assertSame(1, asignaciones[1].getNotas().size());
     }
 }
