@@ -2,47 +2,26 @@ package json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import modelo.AsignacionTarea;
 import modelo.Nota;
 import modelo.NotaConceptual;
 import modelo.NotaNumerica;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ParsearJsonTest {
+    Gson parser;
+
+    @Before
+    public void setupParser() {
+        GsonBuilder parserBuilder = new GsonBuilder();
+        parserBuilder.registerTypeAdapter(Nota.class, new DeserializadorNota());
+        parser = parserBuilder.create();
+    }
+
     @Test
-    public void leerAsignacionesTest() {
-/*{
-    "assignments": [{
-        "id": 1,
-        "title": "Primer Parcial",
-        "description": null,
-        "grades": [{
-            "id": 1,
-            "value": 2,
-            "created_at": "2017-03-25T13:56:07.526Z",
-            "updated_at": "2017-03-25T13:56:07.526Z"
-        },
-        {
-            "id": 2,
-            "value": 7,
-            "created_at": "2017-03-25T13:56:07.595Z",
-            "updated_at": "2017-03-25T13:56:07.595Z"
-        }]
-    },
-
-    {
-        "id": 3,
-        "title": "TPA1",
-        "description": "Primera Entrega del TP Anual",
-        "grades": [{
-            "id": 4,
-            "value": "B+",
-            "created_at": "2017-03-25T13:56:07.649Z",
-            "updated_at": "2017-03-25T13:56:07.649Z"
-        }]
-    }]
-}*/
-
+    public void leerNotasTest() {
         String notaNumericaJson =
         "{\n" +
             "\t\"id\": 4,\n" +
@@ -59,14 +38,79 @@ public class ParsearJsonTest {
             "\t\"updated_at\": \"2017-03-25T13:56:07.649Z\"\n" +
         "}";
 
-        GsonBuilder parserBuilder = new GsonBuilder();
-        parserBuilder.registerTypeAdapter(Nota.class, new DeserializadorNota());
-        Gson parser = parserBuilder.create();
-
         Nota conceptual = parser.fromJson(notaConceptualJson, Nota.class);
         Nota numerica = parser.fromJson(notaNumericaJson, Nota.class);
 
         Assert.assertSame(NotaNumerica.class, numerica.getClass());
         Assert.assertSame(NotaConceptual.class, conceptual.getClass());
+    }
+
+    @Test
+    public void leerAsignación() {
+        String jsonAsignacion =
+        "{\n" +
+        "\t\"id\": 1,\n" +
+        "\t\"title\": \"Primer Parcial\",\n" +
+        "\t\"description\": \"diseño con objetos\",\n" +
+        "\t\"grades\": [{\n" +
+            "\t\t\"id\": 4,\n" +
+            "\t\t\"value\": 5,\n" +
+            "\t\t\"created_at\": \"2017-03-25T13:56:07.649Z\",\n" +
+            "\t\t\"updated_at\": \"2017-03-25T13:56:07.649Z\"\n" +
+        "\t},\n" +
+        "\t{\n" +
+            "\t\t\"id\": 2,\n" +
+            "\t\t\"value\": 7,\n" +
+            "\t\t\"created_at\": \"2017-03-25T13:56:07.595Z\",\n" +
+            "\t\t\"updated_at\": \"2017-03-25T13:56:07.595Z\"\n" +
+            "\t}]\n}";
+
+        AsignacionTarea asignacion = parser.fromJson(jsonAsignacion, AsignacionTarea.class);
+
+        Assert.assertNotNull(asignacion);
+        Assert.assertEquals("Primer Parcial", asignacion.getTarea());
+        Assert.assertEquals("diseño con objetos", asignacion.getDescripcion());
+        Assert.assertSame(2, asignacion.getNotas().size());
+
+        Nota nota0 = asignacion.getNotas().get(0);
+        Assert.assertSame(5, ((NotaNumerica) nota0).getNota() );
+
+        Nota nota1 = asignacion.getNotas().get(1);
+        Assert.assertSame(7, ((NotaNumerica) nota1).getNota() );
+    }
+
+    public void leerAsignaciones() {
+        String asignaciones =
+        "\"assignments\": [{\n" +
+                "        \"id\": 1,\n" +
+                "        \"title\": \"Primer Parcial\",\n" +
+                "        \"description\": null,\n" +
+                "        \"grades\": [{\n" +
+                "            \"id\": 1,\n" +
+                "            \"value\": 2,\n" +
+                "            \"created_at\": \"2017-03-25T13:56:07.526Z\",\n" +
+                "            \"updated_at\": \"2017-03-25T13:56:07.526Z\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 2,\n" +
+                "            \"value\": 7,\n" +
+                "            \"created_at\": \"2017-03-25T13:56:07.595Z\",\n" +
+                "            \"updated_at\": \"2017-03-25T13:56:07.595Z\"\n" +
+                "        }]\n" +
+                "    },\n" +
+                "\n" +
+                "    {\n" +
+                "        \"id\": 3,\n" +
+                "        \"title\": \"TPA1\",\n" +
+                "        \"description\": \"Primera Entrega del TP Anual\",\n" +
+                "        \"grades\": [{\n" +
+                "            \"id\": 4,\n" +
+                "            \"value\": \"B+\",\n" +
+                "            \"created_at\": \"2017-03-25T13:56:07.649Z\",\n" +
+                "            \"updated_at\": \"2017-03-25T13:56:07.649Z\"\n" +
+                "        }]\n" +
+                "    }]\n" +
+                "}";
+        
     }
 }

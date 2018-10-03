@@ -33,7 +33,8 @@ public class AsignacionTarea {
 	}
 	
 	public String getTarea() { return tarea; }
-	
+	public String getDescripcion() { return descripcion; }
+
 	public List<Nota> getNotas() { return notas; }
 	public void setNotas(List<Nota> notas) { this.notas = notas; }
 }

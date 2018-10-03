@@ -11,6 +11,8 @@ public class NotaConceptual extends Nota {
         this.nota = unaNota;
     }
 
+    public EnumNotasConceptuales getNota() { return nota; }
+
     @Override
     public boolean getAprobada(){
         return this.nota.aprueba();

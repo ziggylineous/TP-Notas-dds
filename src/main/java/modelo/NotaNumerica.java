@@ -15,6 +15,8 @@ public class NotaNumerica extends Nota {
         return nota >= 6;
     }
 
+    public int getNota() { return nota; }
+
     @Override
     public String toString() {
         return Integer.toString(nota);

@@ -14,7 +14,8 @@ public class DeserializadorNota implements JsonDeserializer<Nota> {
                             final Type typeOfT,
                             final JsonDeserializationContext context) throws JsonParseException {
 
-        // TODO: sería algo así. Hay que guardar ids y tiempo de creación?
+        // por ahora no hace falta guardar ids y tiempo de creación
+        // con el valor alcanza
         JsonObject jsonNota = json.getAsJsonObject();
         JsonPrimitive valuePrimitive = jsonNota.get("value").getAsJsonPrimitive();
 
