@@ -1,5 +1,7 @@
 package vista;
 
+import com.google.gson.Gson;
+import http.AlumnoHTTP;
 import modelo.Alumno;
 import modelo.AsignacionTarea;
 import modelo.Nota;
@@ -18,6 +20,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.Window;
 import org.uqbar.lacar.ui.model.ListBuilder;
 import org.uqbar.lacar.ui.model.PanelBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
@@ -30,14 +33,17 @@ import java.awt.*;
 
 
 public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
+    java.util.List<Alumno> alumno = null;
     public AlumnoWindow(java.util.List<Alumno> alumnos) {
         super(new AlumnoViewModel(alumnos));
+        alumno=alumnos;
     }
 
     @Override
     public void createContents(Panel mainPanel) {
         setTitle("Vista Alumno");
-        armarPanelSeleccionAlumno(mainPanel);
+       // armarPanelSeleccionAlumno(mainPanel);
+        new Button(mainPanel).setCaption("Modificar datos").onClick( this::modificarDatos);
         armarPanelAlumno(mainPanel);
     }
 
@@ -82,7 +88,6 @@ public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
     private void armarPanelAsignaciones(Panel mainPanel) {
     	Panel panelAsignaciones = new Panel(mainPanel);
     	panelAsignaciones.setWidth(200);
-
         new Label(panelAsignaciones).setText("Asignaciones: ");
 
         List<AsignacionTarea> listaAsignaciones = new List<AsignacionTarea>(panelAsignaciones);
@@ -125,4 +130,10 @@ public class AlumnoWindow extends MainWindow<AlumnoViewModel> {
                 .bindValue(new ObservableProperty<AsignacionTarea>("asignacionSeleccionada"))
                 .setModelToView(new AprobadoBoolToStrTransformer());
     }
+
+
+    private void modificarDatos(){
+        new AlumnoHTTP().put(alumno.get(0));
+    }
 }
+

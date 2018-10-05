@@ -13,8 +13,9 @@ public class Main {
     }
 
     public static void entrega2() {
+
 		try {
-			Alumno alumnoDesdeRecurso = new AlumnoHTTP().traer();
+			Alumno alumnoDesdeRecurso = new http.AlumnoHTTP().traer();
 
 			List<Alumno> alumnos = new ArrayList<>();
 			alumnos.add(alumnoDesdeRecurso);
@@ -24,6 +25,7 @@ public class Main {
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
+
 	}
 
     public static void entrega1() {
