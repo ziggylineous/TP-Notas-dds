@@ -13,6 +13,8 @@
 .idea/**/shelf
 
 # Sensitive or high-churn files
+Notas.iml
+.idea
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
