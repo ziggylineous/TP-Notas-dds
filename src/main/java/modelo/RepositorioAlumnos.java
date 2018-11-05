@@ -55,4 +55,9 @@ public class RepositorioAlumnos {
         // todo
         return Optional.empty();
     }
+
+    // metodo para probar que manda todos los alumnos; sacar
+    public Alumno[] todos() {
+        return alumnos;
+    }
 }
