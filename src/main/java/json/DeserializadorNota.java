@@ -17,7 +17,7 @@ public class DeserializadorNota implements JsonDeserializer<Nota> {
         // por ahora no hace falta guardar ids y tiempo de creación
         // con el valor alcanza
         JsonObject jsonNota = json.getAsJsonObject();
-        JsonPrimitive valuePrimitive = jsonNota.get("value").getAsJsonPrimitive();
+        JsonPrimitive valuePrimitive = jsonNota.get("nota").getAsJsonPrimitive();
 
         if (valuePrimitive.isNumber()) {
             return new NotaNumerica(valuePrimitive.getAsInt());

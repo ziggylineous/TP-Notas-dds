@@ -8,16 +8,9 @@ import org.uqbar.commons.model.annotations.Observable;
 
 @Observable
 public class Alumno {
-    @SerializedName("first_name")
     private String nombre;
-
-    @SerializedName("last_name")
     private String apellido;
-
-    @SerializedName("code")
     private String legajo;
-
-    @SerializedName("github_user")
     private String usuarioGithub;
     
     private List<AsignacionTarea> asignacionesDeTareas;

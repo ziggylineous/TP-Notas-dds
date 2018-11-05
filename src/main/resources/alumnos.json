@@ -1,0 +1,33 @@
+[
+  {
+    "nombre": "Tuco",
+    "apellido": "Amarello",
+    "legajo": "1234560",
+    "usuarioGithub": "Tuqui",
+    "asignacionesDeTareas": [
+      {
+        "tarea": "Primer Parcial",
+        "descripcion": "Diseño con Objetos. Cualidades del Diseño. Refactors",
+        "notas": [
+          { "nota": 2 },
+          { "nota": 6 }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Turco",
+    "apellido": "García",
+    "legajo": "11122330",
+    "usuarioGithub": "TurcoGarcia",
+    "asignacionesDeTareas": [
+      {
+        "tarea": "Primer Parcial",
+        "descripcion": "Diseño con Objetos. Cualidades del Diseño. Refactors",
+        "notas": [
+          { "nota": 8 }
+        ]
+      }
+    ]
+  }
+]
